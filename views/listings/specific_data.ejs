@@ -1,0 +1,163 @@
+<% layout("/layouts/basic.ejs") %>
+<div class="row mt-3">
+  <div class="col-8 offset-2">
+    <h3><%= specific_data.title %></h3>
+  </div>
+  <div class="card col-6 offset-2">
+    <img
+      src="<%=specific_data.image.url%>"
+      class="card-img-top specific_data_img"
+      alt="Image"
+    />
+    <div class="card-body">
+      <b>Owned By: <%= specific_data.owner.username %></b>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <%= specific_data.description %> <br />
+        &#8377;<%= specific_data.price.toLocaleString("en-IN") %> <br />
+        <%= specific_data.location %> <br />
+        <%= specific_data.country %>
+      </p>
+    </div>
+  </div>
+  <% if (currUser && currUser._id.equals(specific_data.owner._id)) {%>
+  <div class="row">
+    <div class="col-1 offset-2">
+      <form method="get" action="/listing/<%= specific_data._id %>/edit">
+        <button class="btn btn-dark">Edit</button>
+      </form>
+    </div>
+    <div class="col-1 offset-2">
+      <form
+        method="post"
+        action="/listing/<%= specific_data._id %>?_method=DELETE"
+        onsubmit="return confirm('Are you sure you want to Delete')"
+      >
+        <button class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+  <% } %>
+</div>
+<hr />
+<div>
+  <br />
+  <%if(currUser){%>
+  <div class="col-8 offset-2"><h4>ADD A REVIEW:</h4></div>
+
+  <div class="row mt-3">
+    <form action="/listing/<%= specific_data._id %>/review" method="post">
+      <div class="col-8 offset-2">
+        <fieldset class="starability-coinFlip">
+          <legend>Rating:</legend>
+          <input
+            type="radio"
+            id="no-rate"
+            class="input-no-rate"
+            name="review[rating]"
+            value="1"
+            checked
+            aria-label="No rating."
+          />
+          <input
+            type="radio"
+            id="first-rate1"
+            name="review[rating]"
+            value="1"
+          />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input
+            type="radio"
+            id="first-rate2"
+            name="review[rating]"
+            value="2"
+          />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input
+            type="radio"
+            id="first-rate3"
+            name="review[rating]"
+            value="3"
+          />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input
+            type="radio"
+            id="first-rate4"
+            name="review[rating]"
+            value="4"
+          />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input
+            type="radio"
+            id="first-rate5"
+            name="review[rating]"
+            value="5"
+          />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+      </div>
+      <div class="col-8 offset-2">
+        <label for="comment">Comment:</label>
+        <textarea
+          cols="5"
+          rows="4"
+          id="comment"
+          class="form-control"
+          name="review[comment]"
+        ></textarea>
+      </div>
+      <br />
+      <button class="btn btn-dark col-2 offset-2">Submit</button>
+    </form>
+  </div>
+
+  <hr />
+  <%}%>
+  <div class="col-8 offset-2">
+    <h4 class="text-dark mb-4 col-8 offset-2">All Reviews:</h4>
+
+    <% if (specific_data.reviews && specific_data.reviews.length > 0) { %>
+    <div class="row g-3">
+      <% specific_data.reviews.forEach((review) => { %>
+      <div class="col-md-5">
+        <div class="border-dark border p-4 rounded bg-light">
+          <h5 class="fw-bold mb-2"></h5>
+          <p><b>@<%= review.author.username %></b></p>
+          <p class="starability-result" data-rating="<%= review.rating %>"></p>
+          <p><%= review.comment %></p>
+
+          <form
+            method="post"
+            action="/listing/<%= specific_data._id %>/review/<%=review._id %>?_method=DELETE"
+            onsubmit="return confirm('Are you sure you want to Delete')"
+          >
+            <button class="btn btn-dark col-7">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <p class="text-muted">No reviews yet.</p>
+    <% } %>
+    <hr />
+  </div>
+</div>
+<div class="col-8 offset-2">
+  <h3>Location:</h3>
+  <div id="map"></div>
+</div>
+<div class="col-8 offset-2" style="margin-top: 10px">
+  <input
+    type="text"
+    id="address-input"
+    value="<%= specific_data.location %>,<%= specific_data.country %>"
+    style="width: 100%; padding: 8px"
+    readonly
+  />
+</div>
+
+<script src="/js/map.js"></script>
+
+<br />

@@ -1,0 +1,74 @@
+<% layout("/layouts/basic.ejs") %>
+<div class="row">
+  <div class="col-8 offset-2">
+    <br />
+    <h2><b>Property Detail:</b></h2>
+    <form
+      method="post"
+      action="/listing"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <label for="title" class="form-label">Title:</label>
+        <input
+          type="text"
+          placeholder="Enter Title"
+          name="title"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div>
+        <label for="description" class="form-label">Description:</label>
+        <textarea name="description" class="form-control" required></textarea>
+        <div class="valid-feedback">Look good!</div>
+      </div>
+      <div>
+        <label for="Image" class="form-label">Upload Listing Image:</label>
+        <input type="file" name="image" class="form-control" required />
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="Price" class="form-label">Price:</label>
+          <input
+            type="number"
+            placeholder="Enter Price"
+            name="price"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Price should be valid!</div>
+        </div>
+
+        <div class="col-md-8">
+          <label for="location" class="form-label">Location:</label
+          ><input
+            type="text"
+            placeholder="Enter location"
+            name="location"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Location should be valid!</div>
+        </div>
+      </div>
+      <div>
+        <label for="country" class="form-label">Country:</label>
+        <input
+          type="text"
+          placeholder="Enter country"
+          name="country"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">Country name should be valid</div>
+      </div>
+      <br />
+      <button class="btn btn-dark">Add</button>
+    </form>
+    <br />
+  </div>
+</div>

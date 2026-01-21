@@ -1,0 +1,55 @@
+<% layout("/layouts/basic.ejs") %>
+<style>
+  button {
+    border: 2px black;
+  }
+</style>
+<div class="row">
+  <div class="col-8 offset-2"><h1>Login on Airbnb:</h1></div>
+  <div class="col-8 offset-2">
+    <form action="/login" method="post">
+      <div>
+        <label for="username" class="form-label">Username:</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="password" class="form-label">Password:</label>
+        <input
+          minlength="5"
+          maxlength="12"
+          type="password"
+          name="password"
+          id="password"
+          class="form-control"
+          required
+        />
+      </div>
+      <div>
+        <br />
+        <button
+          type="submit"
+          class="btn btn-dark col-12"
+          style="border-radius: 50px"
+        >
+          Login
+        </button>
+        <br />
+        <br />
+        <div
+          class="signup_div"
+          style="display: flex; align-items: center; gap: 5px"
+        >
+          <span>Don't have account,</span>
+          <a class="nav-link" href="/signup"><b>login here</b></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

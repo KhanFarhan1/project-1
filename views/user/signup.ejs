@@ -1,0 +1,47 @@
+<% layout("/layouts/basic.ejs") %>
+<div class="row">
+  <div class="col-8 offset-2"><h1>Signup on Airbnb:</h1></div>
+  <div class="col-8 offset-2">
+    <form action="/signup" method="post">
+      <div>
+        <label for="username" class="form-label">Username:</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div>
+        <label for="email" class="form-label">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div>
+        <label for="password" class="form-label">Password:</label>
+        <input
+          minlength="5"
+          maxlength="12"
+          type="password"
+          name="password"
+          id="password"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div>
+        <br />
+        <button class="btn btn-success">Signup</button>
+      </div>
+    </form>
+  </div>
+</div>

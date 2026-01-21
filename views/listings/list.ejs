@@ -1,0 +1,92 @@
+<% layout("/layouts/basic.ejs") %>
+<style>
+#filter{
+  display: flex;
+  flex-wrap: wrap; 
+}
+.filter{
+  text-align: center;
+  padding-bottom: .5rem;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  opacity: .7;
+}
+.filter:hover{
+  opacity: 1;
+  cursor: pointer;
+}
+.filter p {
+  font-size: small;
+}
+</style>
+<body>
+  <div id="filter">
+    <div class="filter">
+  <div><i class="fa-solid fa-fire icon"></i></div>
+  <p>Trending</p>
+</div>
+<div class="filter">
+  <div><i class="fa-solid fa-house"></i></div>
+  <p>Home</p>
+</div>
+<div class="filter">
+  <div><i class="fa-solid fa-mountain-city"></i></div>
+  <p>Iconic City</p>
+</div>
+<div class="filter">
+  <div><i class="fa-solid fa-mountain"></i></div>
+  <p>Mountain</p>
+</div>
+<div class="filter">
+  <div><i class="fa-solid fa-bed"></i></div>
+  <p>Hotels</p>
+</div>
+<div class="filter">
+  <div><i class="fa-solid fa-utensils"></i></div>
+  <p>Restaurants</p>
+</div>
+<div class="filter">
+  <div><i class="fa-solid fa-tree"></i></div>
+  <p>Nature</p>
+</div>
+
+<div class="filter">
+  <div><i class="fa-solid fa-spa"></i></div>
+  <p>Spa & Wellness</p>
+</div>
+<div class="filter">
+  <div><i class="fa-solid fa-car"></i></div>
+  <p>Car Rentals</p>
+</div>
+<div class="filter">
+  <div><i class="fa-solid fa-plane"></i></div>
+  <p>Flights</p>
+</div>
+
+
+  </div>
+  <!-- <form method="get" action="/listings/new">
+    <Button>Crete New Listing!!</Button>
+  </form> -->
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <% for (let data of all_data) {%>
+    <a href="/listing/<%= data._id %>" class="listing_link">
+      <div class="card col">
+        <img
+          src="<%= data.image.url %>"
+          class="card-img-top"
+          alt="listing_image"
+          style="height: 20rem"
+        />
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= data.title %> </b><br />
+            &#8377;<%= data.price.toLocaleString("en-IN") %>/night
+          </p>
+        </div>
+      </div>
+    </a>
+    <%}%>
+  </div>
+</body>
